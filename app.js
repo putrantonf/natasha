@@ -403,7 +403,7 @@ function replay() {
   hellPainting.touch = gatePainting.touch = gardenPainting.touch = [-2, -2, 0];
   delete elements.world.dataset.line; delete elements.world.dataset.scene;
   elements['chapter-mark'].textContent = 'PROLOG'; elements['chapter-name'].textContent = 'Gerbang pertama';
-  elements['gate-hint'].textContent = gateScene.ritual.hint;
+  elements['gate-hint'].textContent = gateScene.ritual.intro;
   elements['gate-whisper'].textContent = gateScene.ritual.whispers[0];
   setPhase('arrival'); door.seals[0].focus({ preventScroll: true });
   announce('Kembali ke gerbang. Sentuh dan tahan ketiga lambang untuk membukanya.');

@@ -7,10 +7,11 @@ export const gateScene = {
     { x: 839, y: 191, width: 78, height: 76, name: 'nama' },
   ],
   ritual: {
+    intro: 'Tidak ada jalan kembali. Hanya sebuah pintu besar di hadapanmu.',
     hint: 'Tahan jarimu pada ukiran yang paling terang sampai baranya menyala. Ada tiga ukiran.',
     ready: 'Sentuh celah pintu yang hangat. Tahan untuk membukanya.',
     whispers: [
-      'Ada kehangatan di balik batu yang dingin.',
+      'Apakah kamu sedang bermimpi?',
       'Satu bara menyala. Dua lagi.',
       'Celah pintu mulai terasa hangat.',
       'Kini pintunya bisa didorong.',
