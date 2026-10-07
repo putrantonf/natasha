@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101417" />
+    <meta name="description" content="Sebuah perjalanan melewati neraka, menuju tempat yang dibangun untuk Natasha." />
+    <title>Di Balik Bara — Untuk Natasha</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101417'/%3E%3Cpath d='M8 26V14a8 8 0 0 1 16 0v12M16 8v18M8 26h16' fill='none' stroke='%23d4b37a' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <main id="world" class="world" data-phase="loading" data-realm="gate" aria-label="Perjalanan Natasha di balik gerbang">
+      <div class="scenery" aria-hidden="true">
+        <div id="sanctum-plane" class="sanctum-plane">
+          <img id="sanctum-art" class="sanctum-art" src="./assets/sanctum-monument.png" alt="" />
+          <canvas id="sanctum-motion" class="painting-motion sanctum-motion"></canvas>
+        </div>
+        <div id="garden-plane" class="garden-plane">
+          <img id="garden-art" class="garden-art" src="./assets/garden-statue.png" alt="" />
+          <canvas id="garden-motion" class="painting-motion garden-motion"></canvas>
+        </div>
+        <div id="passage-plane" class="passage-plane">
+          <img id="passage-art" class="passage-art" src="./assets/passage-panorama.png" alt="" />
+          <canvas id="passage-motion" class="painting-motion passage-motion"></canvas>
+        </div>
+        <div id="hell-plane" class="hell-plane">
+          <img id="hell-art" class="hell-art" src="./assets/hell-panorama.png" alt="" />
+          <canvas id="hell-motion" class="painting-motion hell-motion"></canvas>
+          <div class="lava-glow"></div>
+        </div>
+        <div id="mirror-plane" class="mirror-plane">
+          <img id="mirror-art" class="mirror-art" src="./assets/mirror-chamber.png" data-fit="portrait" alt="" />
+          <canvas id="mirror-motion" class="painting-motion mirror-motion"></canvas>
+        </div>
+        <div id="gate-plane" class="gate-plane">
+          <img id="gate-art" class="gate-art" src="./assets/gate-background.png" alt="" />
+          <canvas id="gate-motion" class="painting-motion gate-motion"></canvas>
+          <div class="door-void"></div>
+          <div id="door-left" class="door-leaf door-left"></div>
+          <div id="door-right" class="door-leaf door-right"></div>
+          <div class="gate-light"></div>
+        </div>
+        <div class="mist mist-far"></div>
+        <div class="mist mist-near"></div>
+        <div class="vignette"></div>
+      </div>
+      <canvas id="embers" class="embers" aria-hidden="true"></canvas>
+      <canvas id="garden-life" class="garden-life" aria-hidden="true"></canvas>
+      <canvas id="mirror-reflection" class="mirror-reflection" aria-hidden="true"></canvas>
+      <canvas id="sanctum-life" class="sanctum-life" aria-hidden="true"></canvas>
+      <p id="monument-inscription" class="sr-only" hidden></p>
+      <section id="sanctum-interaction" class="sanctum-interaction" aria-label="Aliran menuju patung Natasha" hidden>
+        <div id="sanctum-surfaces" class="sanctum-surfaces"></div>
+        <p id="sanctum-hint" class="garden-hint"></p>
+      </section>
+      <section id="mirror-interaction" class="mirror-interaction" aria-label="Bercermin di neraka" hidden>
+        <button id="mirror-glass" class="mirror-glass" type="button" aria-label="Usap abu di kaca cermin. Dengan keyboard, tekan Enter."></button>
+        <p id="mirror-hint" class="garden-hint"></p>
+      </section>
+      <div id="door-interaction" class="door-interaction" role="group" aria-label="Ukiran pada pintu" hidden>
+        <button class="seal" data-seal="0" aria-label="Hangatkan ukiran ingatan. Sentuh dan tahan, atau tekan Enter." type="button">
+        </button>
+        <button class="seal" data-seal="1" aria-label="Hangatkan ukiran janji. Sentuh dan tahan, atau tekan Enter." type="button">
+        </button>
+        <button class="seal" data-seal="2" aria-label="Hangatkan ukiran nama. Sentuh dan tahan, atau tekan Enter." type="button">
+        </button>
+        <button id="door-push" class="door-push" type="button" aria-label="Dorong pintu. Sentuh dan tahan celahnya, atau tekan Enter." hidden>
+        </button>
+      </div>
+      <canvas id="lucifer" class="lucifer" role="img" aria-label="Lucifer, malaikat jatuh dan penguasa neraka, bertanduk dengan jubah gelap"></canvas>
+      <div class="ambient-light" aria-hidden="true"></div>
+      <div id="touch-aura" class="touch-aura" aria-hidden="true"></div>
+
+      <section id="trail" class="trail" aria-label="Perjalanan di jalan batu" hidden>
+        <svg class="trail-lines" aria-hidden="true"><path class="trail-track"/><path class="trail-glow"/></svg>
+        <button id="trail-stone" class="trail-stone" type="button" aria-label="Susuri lantai yang berpendar dengan sentuhan. Tekan Enter untuk melanjutkan dengan keyboard."></button>
+        <p id="trail-hint" class="trail-hint"></p>
+      </section>
+
+      <section id="garden-interaction" class="garden-interaction" aria-label="Sentuhan di taman" hidden>
+        <div id="garden-surfaces" class="garden-surfaces"></div>
+        <p id="garden-hint" class="garden-hint"></p>
+      </section>
+
+      <header class="hud">
+        <div class="chapter-mark">
+          <span class="mark" aria-hidden="true">N</span>
+          <div><span id="chapter-mark" class="eyebrow">PROLOG</span><span id="chapter-name" class="chapter-name">Gerbang pertama</span></div>
+        </div>
+        <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Aktifkan suara" aria-pressed="false">
+          <svg class="sound-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path class="sound-slash" d="m16 10 4 4m0-4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span id="sound-label">Suara mati</span>
+        </button>
+      </header>
+
+      <section id="arrival" class="arrival" aria-labelledby="arrival-title">
+        <h1 id="arrival-title">Tiga ukiran menyimpan bara.<br />Batu ini masih mengingat sentuhan.</h1>
+        <p id="gate-hint">Tahan jarimu pada ukiran yang paling terang sampai baranya menyala. Ada tiga ukiran.</p>
+        <span id="gate-whisper" class="gate-whisper">Ada kehangatan di balik batu yang dingin.</span>
+      </section>
+
+      <section id="dialogue" class="dialogue" aria-label="Percakapan dengan Lucifer" hidden>
+        <button id="lore-trigger" class="lore-trigger" type="button" aria-haspopup="dialog" aria-controls="lore-dialog" aria-expanded="false" hidden>
+          <span class="scroll-token" aria-hidden="true"><span></span></span>
+          <span class="lore-label">Gulungan</span>
+        </button>
+        <div class="speaker-row"><span class="speaker-line" aria-hidden="true"></span><span id="speaker-name" class="speaker-name">Lucifer</span><span id="speaker-role" class="speaker-role">THE FALLEN ANGEL</span></div>
+        <p id="dialogue-aside" class="dialogue-aside" hidden></p>
+        <p id="dialogue-text" class="dialogue-text"></p>
+        <div id="answer-row" class="answer-row" hidden><button id="answer-button" class="answer-button" type="button"></button><span class="choice-mark" aria-hidden="true">01</span></div>
+        <button id="continue-button" class="continue-button" type="button" aria-label="Lanjutkan percakapan" hidden><span aria-hidden="true">◇</span><span class="sr-only">Lanjutkan percakapan</span></button>
+      </section>
+
+      <section id="ending" class="ending" aria-labelledby="ending-title" hidden>
+        <span class="ending-kicker">UNTUK NATASHA SHANIA CAESSARA</span>
+        <h2 id="ending-title">Selamat ulang tahun<br />ya sayang</h2>
+        <p>Aku senang kamu ada.<br />I love you sayang</p>
+        <div class="ending-divider" aria-hidden="true"><span></span>◇<span></span></div>
+        <button id="ending-letter" class="ending-letter" type="button" aria-haspopup="dialog" aria-controls="lore-dialog" aria-expanded="false"><span class="scroll-token" aria-hidden="true"><span></span></span><span>Surat untukmu</span></button>
+        <button id="replay-button" class="replay-button" type="button">Kembali ke gerbang</button>
+      </section>
+
+      <dialog id="lore-dialog" class="lore-dialog" aria-labelledby="lore-title">
+        <div class="lore-parchment">
+          <span class="parchment-roll roll-top" aria-hidden="true"></span>
+          <div class="lore-sheet">
+            <span id="lore-kicker" class="lore-kicker">CATATAN NERAKA</span>
+            <h2 id="lore-title" tabindex="-1"></h2>
+            <div class="lore-divider" aria-hidden="true">◇</div>
+            <div id="lore-copy" class="lore-copy"></div>
+            <button id="lore-close" class="lore-close" type="button">Gulung kembali <span aria-hidden="true">↩</span></button>
+          </div>
+          <span class="parchment-roll roll-bottom" aria-hidden="true"></span>
+        </div>
+      </dialog>
+
+      <p id="load-error" class="load-error" role="alert" hidden></p>
+      <div id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    </main>
+  </body>
+</html>

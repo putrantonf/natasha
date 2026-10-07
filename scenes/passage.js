@@ -1,0 +1,51 @@
+// The threshold is a place to cross, not a transition card.
+export const passageScenes = [
+  {
+    id: 'cooling', realm: 'passage', chapter: 'MENINGGALKAN BARA', title: 'Di bawah batu',
+    camera: { x: .35, y: .54, zoom: 1.03 }, travel: 3200,
+    lines: [
+      { id: 'a-first-breeze', speaker: 'Natasha', text: 'Eh. Anginnya udah ga sepanas tadi.' },
+      { id: 'out-of-the-fire', gesture: 'listen', listening: 'listen',
+        text: 'Lava sudah di belakang kita.\nDi bawah batu ini ada mata air.', answer: 'Di neraka ada mata air?' },
+      { id: 'water-in-hell', gesture: 'reassess', listening: 'listen',
+        text: 'Tentu. Tempat ini luas.\nMerah bukan satu-satunya warna yang tersedia.', answer: 'Dari tadi yang kamu tunjukin merah semua.' },
+      { id: 'keep-walking', gesture: 'permit',
+        text: 'Sekarang lihat yang ini.\nKita turun sedikit, lewat sisi air.' },
+    ],
+  },
+  {
+    id: 'spring', realm: 'passage', chapter: 'YANG MASIH TUMBUH', title: 'Mata air di celah batu',
+    camera: { x: .590, y: .59, zoom: 1.04 }, travel: 3200,
+    interaction: { kind: 'stream', hint: 'Mulai di riak yang terang. Usap mengikuti air sampai ke kuncup merah muda.',
+      route: [[.540,.745], [.548,.780], [.560,.815], [.580,.870], [.605,.907], [.631,.925]],
+      flower: { x: .640, y: .934, size: .034 } },
+    lines: [
+      { id: 'real-water', speaker: 'Natasha', text: 'Beneran ada air. Bukan lava lagi, kan?' },
+      { id: 'touch-the-spring', gesture: 'reassess', listening: 'listen',
+        text: 'Air. Aku masih bisa membedakan keduanya.', answer: 'Ya siapa tahu. Batunya hitam semua.' },
+      { id: 'roots-in-stone', gesture: 'listen', listening: 'listen',
+        text: 'Lihat kuncup di tepi air itu.\nIa belum membuka.', answer: 'Bisa aku bikin mekar?' },
+      { id: 'try-the-water', gesture: 'permit',
+        text: 'Coba bawa aliran airnya sampai ke sana.\nPelan saja. Kita punya waktu.' },
+    ],
+  },
+  {
+    id: 'threshold', realm: 'passage', chapter: 'SEBELUM CAHAYA', title: 'Lengkung yang hidup',
+    camera: { x: .83, y: .50, zoom: 1.03 }, travel: 3600,
+    interaction: { kind: 'passage', hint: 'Sentuh anak tangga yang kena cahaya. Tahan untuk berjalan; lepaskan untuk berhenti.',
+      area: [.78, .55, .93, .85], spot: { x: .847, y: .69 } },
+    lines: [
+      { id: 'a-different-smell', speaker: 'Natasha', text: 'Ih, bunganya kebuka.\nWangi. Udah ga bau asap.' },
+      { id: 'flowers-over-ash', gesture: 'listen', listening: 'listen',
+        text: 'Airnya sampai.\nDi atas lengkung itu juga ada bunga. Akarnya menempel pada batu yang sama.', answer: 'Tapi jadi bagus banget.' },
+      { id: 'not-the-same-fate', gesture: 'listen', listening: 'listen',
+        text: 'Yang tumbuh di sini tidak harus menjadi seperti tempat asalnya.', answer: 'Berarti bisa beda sendiri, gitu?' },
+      { id: 'room-to-grow', gesture: 'reassess', listening: 'listen',
+        text: 'Bisa.\nTidak perlu meminta izin pada batu untuk menjadi bunga.', answer: 'Nah, aku suka yang ini.' },
+      { id: 'no-rushing-the-doorway', gesture: 'listen', listening: 'listen',
+        text: 'Jalannya masih naik sedikit.\nKalau ingin berhenti melihat-lihat, berhenti saja.', answer: 'Lanjut. Aku penasaran.' },
+      { id: 'through-the-living-arch', gesture: 'permit',
+        text: 'Lewat anak tangga yang terkena cahaya.\nAku di sebelahmu.' },
+    ],
+  },
+];
